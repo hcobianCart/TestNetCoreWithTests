@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: TestNetCoreWithTests
+  name: webapi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: TestNetCoreWithTests
+      app: webapi
   template:
     metadata:
       labels:
-        app: TestNetCoreWithTests
+        app: webapi
     spec:
       containers:
-      - name: TestNetCoreWithTests
+      - name: webapi
         image: gcr.io/PROJECT_ID/IMAGE:TAG
         imagePullPolicy: Always
         resources:
