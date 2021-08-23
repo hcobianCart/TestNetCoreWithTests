@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: TestNetCoreWithTests
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: TestNetCoreWithTests
+  template:
+    metadata:
+      labels:
+        app: TestNetCoreWithTests
+    spec:
+      containers:
+      - name: TestNetCoreWithTests
+        image: gcr.io/PROJECT_ID/IMAGE:TAG
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
