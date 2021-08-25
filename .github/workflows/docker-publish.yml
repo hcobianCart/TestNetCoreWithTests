@@ -16,6 +16,6 @@ jobs:
         with:
           image: hcobiancart/test
           registry: docker.io
-          dockerfile: ./src/testAPI/Dockerfile
+          directory: ./src/testAPI
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
