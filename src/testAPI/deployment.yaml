@@ -13,10 +13,10 @@ spec:
         app: webapi
     spec:
       containers:
-      - name: webapi
+      - name: app
         image: gcr.io/PROJECT_ID/IMAGE:TAG
         imagePullPolicy: Always
         resources:
           limits:
             memory: "128Mi"
-            cpu: "500m"
+            cpu: "300m"

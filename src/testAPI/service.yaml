@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     app: webapi
+  type: LoadBalancer
   ports:
   - port: 80  
     targetPort: 8080
