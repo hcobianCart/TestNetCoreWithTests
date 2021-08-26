@@ -39,7 +39,7 @@ jobs:
 
     - uses: microsoft/variable-substitution@v1 
       with:
-        files: './testAPI/*.json,'
+        files: '**/appsettings.json'
       env:
         Auth0Management.Domain: "value2"
         Auth0Management.client_id: ${{ secrets.client_id }}
