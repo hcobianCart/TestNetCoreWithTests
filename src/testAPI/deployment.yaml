@@ -13,23 +13,12 @@ spec:
         app: webapi
     spec:
       containers:
-      - name: app
+      - name: webapi
         image: gcr.io/PROJECT_ID/IMAGE:TAG
         imagePullPolicy: Always
         resources:
           limits:
             memory: "128Mi"
-            cpu: "300m"
+            cpu: "200m"
         ports:
         - containerPort: 80
-        env:
-        - name: "ASPNETCORE_ENVIRONMENT"
-          value: "Development2"
-        volumeMounts:
-        - name: secrets
-          mountPath: /app
-          readOnly: true
-      volumes:
-      - name: secrets
-        secret:
-          secretName: secret-appsettings
