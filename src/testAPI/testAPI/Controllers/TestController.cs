@@ -28,6 +28,7 @@ namespace testAPI.Controllers
         [HttpGet]
         public ActionResult Get()
         {
+
             //if (!Env.IsProduction())
             {
                 return Ok(
