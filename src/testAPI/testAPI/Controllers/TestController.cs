@@ -28,7 +28,7 @@ namespace testAPI.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            if (!Env.IsProduction())
+            //if (!Env.IsProduction())
             {
                 return Ok(
                     new
@@ -41,8 +41,8 @@ namespace testAPI.Controllers
                     }
                     );
             }
-            else
-                return NotFound();
+            //else
+                //return NotFound();
         }
 
     }
