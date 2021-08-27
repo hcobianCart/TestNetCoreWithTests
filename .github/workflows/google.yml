@@ -18,18 +18,19 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}     # TODO: update to cluster name
-  GKE_ZONE: ${{ secrets.GKE_ZONE }}   # TODO: update to cluster zone
   DEPLOYMENT_NAME: webapi # TODO: update to deployment name
   IMAGE: webapi
 
 jobs:
-  setup-build-publish-deploy:
-    name: Setup, Build, Publish, and Deploy
+
+  Deploy-Development:
+    name: Deploy-Development 
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./src/testAPI
+    environment: 
+      name: Development
 
     steps:
     - name: Checkout
@@ -58,8 +59,8 @@ jobs:
     # Get the GKE credentials so we can deploy to the cluster
     - uses: google-github-actions/get-gke-credentials@v0.2.1
       with:
-        cluster_name: ${{ env.GKE_CLUSTER }}
-        location: ${{ env.GKE_ZONE }}
+        cluster_name: ${{ secrets.GKE_CLUSTER }}
+        location: ${{ secrets.GKE_ZONE }}
         credentials: ${{ secrets.GKE_SA_KEY }}
 
     # Build the Docker image
@@ -69,6 +70,7 @@ jobs:
           --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
+          --build-arg ASPNETCORE_ENVIRONMENT=Development \
           .
 
     # Push the Docker image to Google Container Registry
