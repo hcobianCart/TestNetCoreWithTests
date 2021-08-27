@@ -18,11 +18,10 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: autopilot-cluster-1     # TODO: update to cluster name
-  GKE_ZONE: us-central1   # TODO: update to cluster zone
+  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}     # TODO: update to cluster name
+  GKE_ZONE: ${{ secrets.GKE_ZONE }}   # TODO: update to cluster zone
   DEPLOYMENT_NAME: webapi # TODO: update to deployment name
   IMAGE: webapi
-  TAG: 1.0.0
 
 jobs:
   setup-build-publish-deploy:
@@ -31,7 +30,6 @@ jobs:
     defaults:
       run:
         working-directory: ./src/testAPI
-    environment: production
 
     steps:
     - name: Checkout
@@ -41,8 +39,10 @@ jobs:
       with:
         files: '**/appsettings.json'
       env:
-        Auth0Management.Domain: "value2"
-        Auth0Management.client_id: ${{ secrets.client_id }}
+        Auth0Management.Domain: ${{ secrets.AUTH0MANAGEMENT_DOMAIN }}
+        Auth0Management.client_id: ${{ secrets.AUTH0MANAGEMENT_CLIENT_ID }}
+        Auth0Management.audience: ${{ secrets.AUTH0MANAGEMENT_AUDIENCE }}
+        Auth0Management.client_secret: ${{ secrets.AUTH0MANAGEMENT_CLIENT_SECRET }}
 
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
