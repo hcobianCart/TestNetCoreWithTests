@@ -29,8 +29,7 @@ jobs:
     defaults:
       run:
         working-directory: ./src/testAPI
-    environment: 
-      name: Development
+    environment:  Development
 
     steps:
     - name: Checkout
