@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: webapi-staging-service
-  namespace: defaults
+  namespace: default
   labels:
     app: webapi-staging
 spec:

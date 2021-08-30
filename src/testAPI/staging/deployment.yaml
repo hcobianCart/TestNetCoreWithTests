@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: webapi-staging-config-gcmc
-  namespace: defaults
+  namespace: default
   labels:
     app: webapi-staging
 data:
@@ -42,7 +42,7 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: webapi-staging-hpa-zlar
-  namespace: cart-staging-webapi
+  namespace: default
   labels:
     app: webapi-staging
 spec:
