@@ -84,6 +84,7 @@ jobs:
     - name: Deploy
       run: |-
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+        ./kustomize edit set ASPNETCORE_ENVIRONMENT Development=Staging
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/webapi-dev
         kubectl get services -o wide
