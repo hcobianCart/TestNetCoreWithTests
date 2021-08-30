@@ -35,7 +35,7 @@ jobs:
     - name: $GITHUB_SHA
       run: |-
         echo $GITHUB_SHA
-        
+
     - name: Checkout
       uses: actions/checkout@v2
 
@@ -88,7 +88,7 @@ jobs:
     - name: Deploy
       run: |-
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-        ./kustomize build . | kubectl apply -f -
+        ./kustomize build ./dev | kubectl apply -f -
         kubectl rollout status deployment/webapi-dev
         kubectl get services -o wide
 
