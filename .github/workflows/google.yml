@@ -18,7 +18,7 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  DEPLOYMENT_NAME: webapi-dev-deployment # TODO: update to deployment name
+
   IMAGE: webapi
 
 jobs:
@@ -35,7 +35,7 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v2
-      
+
     # Insert values to appappsettings.Development file
     - uses: microsoft/variable-substitution@v1 
       with:
@@ -109,7 +109,7 @@ jobs:
         cd dev
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
-        kubectl rollout status deployment/webapi-dev
+        kubectl rollout status deployment/cart-dev-api
         kubectl get services -o wide
 
   Deploy-Staging:
@@ -157,7 +157,7 @@ jobs:
         cd staging
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
-        kubectl rollout status deployment/webapi-staging
+        kubectl rollout status deployment/cart-staging-api
         kubectl get services -o wide
 
   Deploy-Production:
@@ -205,6 +205,6 @@ jobs:
         cd production
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
-        kubectl rollout status deployment/webapi-production
+        kubectl rollout status deployment/cart-prod-api
         kubectl get services -o wide
       
