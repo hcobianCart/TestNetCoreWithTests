@@ -41,6 +41,8 @@ jobs:
       with:
         files: '**/appsettings.Development.json'
       env:
+        Auth0.Domain: ${{ secrets.DEV_AUTH0_DOMAIN }}
+        Auth0.ApiIdentifier: ${{ secrets.DEV_AUTH0_APIIDENTIFIER }}
         Auth0Management.Domain: ${{ secrets.DEV_AUTH0MANAGEMENT_DOMAIN }}
         Auth0Management.client_id: ${{ secrets.DEV_AUTH0MANAGEMENT_CLIENT_ID }}
         Auth0Management.audience: ${{ secrets.DEV_AUTH0MANAGEMENT_AUDIENCE }}
@@ -51,6 +53,8 @@ jobs:
       with:
         files: '**/appsettings.Staging.json'
       env:
+        Auth0.Domain: ${{ secrets.STA_AUTH0_DOMAIN }}
+        Auth0.ApiIdentifier: ${{ secrets.STA_AUTH0_APIIDENTIFIER }}
         Auth0Management.Domain: ${{ secrets.STA_AUTH0MANAGEMENT_DOMAIN }}
         Auth0Management.client_id: ${{ secrets.STA_AUTH0MANAGEMENT_CLIENT_ID }}
         Auth0Management.audience: ${{ secrets.STA_AUTH0MANAGEMENT_AUDIENCE }}
@@ -61,6 +65,8 @@ jobs:
       with:
         files: '**/appsettings.Production.json'
       env:
+        Auth0.Domain: ${{ secrets.PRO_AUTH0_DOMAIN }}
+        Auth0.ApiIdentifier: ${{ secrets.PRO_AUTH0_APIIDENTIFIER }}
         Auth0Management.Domain: ${{ secrets.PRO_AUTH0MANAGEMENT_DOMAIN }}
         Auth0Management.client_id: ${{ secrets.PRO_AUTH0MANAGEMENT_CLIENT_ID }}
         Auth0Management.audience: ${{ secrets.PRO_AUTH0MANAGEMENT_AUDIENCE }}
