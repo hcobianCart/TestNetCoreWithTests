@@ -18,11 +18,9 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-
   IMAGE: cart-api
 
 jobs:
-
   Deploy-Development:
     name: Deploy-Development 
     runs-on: ubuntu-latest
