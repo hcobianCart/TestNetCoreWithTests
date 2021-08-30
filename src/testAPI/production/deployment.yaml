@@ -2,36 +2,36 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cart-dev-api-config
+  name: cart-prod-api-config
   namespace: default
   labels:
-    app: cart-dev-api
+    app: cart-prod-api
 data:
-  ASPNETCORE_ENVIRONMENT: Development
+  ASPNETCORE_ENVIRONMENT: Production
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cart-dev-api
+  name: cart-prod-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cart-dev-api
+      app: cart-prod-api
   template:
     metadata:
       labels:
-        app: cart-dev-api
+        app: cart-prod-api
     spec:
       containers:
-      - name: cart-dev-api
+      - name: cart-prod-api
         image: gcr.io/PROJECT_ID/IMAGE:TAG
         env:
         - name: ASPNETCORE_ENVIRONMENT
           valueFrom:
             configMapKeyRef:
               key: ASPNETCORE_ENVIRONMENT
-              name: cart-dev-api-config
+              name: cart-prod-api-config
         imagePullPolicy: Always
         resources:
           limits:
@@ -41,14 +41,14 @@ spec:
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: cart-dev-api-hpa-zlar
+  name: cart-prod-api-hpa
   namespace: default
   labels:
-    app: cart-dev-api
+    app: cart-prod-api
 spec:
   scaleTargetRef:
     kind: Deployment
-    name: cart-dev-api
+    name: cart-prod-api
     apiVersion: apps/v1
   minReplicas: 1
   maxReplicas: 5

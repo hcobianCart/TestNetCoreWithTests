@@ -2,36 +2,36 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: webapi-staging-config-gcmc
+  name: cart-staging-api-config
   namespace: default
   labels:
-    app: webapi-staging
+    app: cart-staging-api
 data:
   ASPNETCORE_ENVIRONMENT: Staging
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapi-staging
+  name: cart-staging-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webapi-staging
+      app: cart-staging-api
   template:
     metadata:
       labels:
-        app: webapi-staging
+        app: cart-staging-api
     spec:
       containers:
-      - name: webapi-staging
+      - name: cart-staging-api
         image: gcr.io/PROJECT_ID/IMAGE:TAG
         env:
         - name: ASPNETCORE_ENVIRONMENT
           valueFrom:
             configMapKeyRef:
               key: ASPNETCORE_ENVIRONMENT
-              name: webapi-staging-config-gcmc
+              name: cart-staging-api-config
         imagePullPolicy: Always
         resources:
           limits:
@@ -41,14 +41,14 @@ spec:
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: webapi-staging-hpa-zlar
+  name: cart-staging-api-hpa
   namespace: default
   labels:
-    app: webapi-staging
+    app: cart-staging-api
 spec:
   scaleTargetRef:
     kind: Deployment
-    name: webapi-staging
+    name: cart-staging-api
     apiVersion: apps/v1
   minReplicas: 1
   maxReplicas: 5
