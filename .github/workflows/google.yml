@@ -24,7 +24,7 @@ env:
 jobs:
 
   Preparation : 
-    name: Deploy-Development
+    name: Preparation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -58,7 +58,7 @@ jobs:
     
   Deploy-Development:
     name: Deploy-Development
-    needs: [Build]
+    needs: [Preparation]
     runs-on: ubuntu-latest
     defaults:
       run:
