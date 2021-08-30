@@ -32,6 +32,10 @@ jobs:
     environment:  Development
 
     steps:
+    - name: $GITHUB_SHA
+      run: |-
+        echo $GITHUB_SHA
+        
     - name: Checkout
       uses: actions/checkout@v2
 
