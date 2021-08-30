@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: webapi-dev-config-gcmc
-  namespace: cart-dev-webapi
+  namespace: defaults
   labels:
     app: webapi-dev
 data:
@@ -42,7 +42,7 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: webapi-dev-hpa-zlar
-  namespace: cart-dev-webapi
+  namespace: defaults
   labels:
     app: webapi-dev
 spec:

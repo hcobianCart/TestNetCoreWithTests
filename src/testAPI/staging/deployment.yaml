@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: webapi-staging-config-gcmc
-  namespace: cart-staging-webapi
+  namespace: defaults
   labels:
     app: webapi-staging
 data:
