@@ -99,14 +99,14 @@ jobs:
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
-        cd dev
+        cd Deployments/development
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        cd dev
+        cd Deployments/development
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/cart-dev-api
@@ -147,14 +147,14 @@ jobs:
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
-        cd staging
+        cd Deployments/staging
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        cd staging
+        cd Deployments/staging
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/cart-staging-api
@@ -195,14 +195,14 @@ jobs:
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
-        cd production
+        cd Deployments/production
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        cd production
+        cd Deployments/production
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/cart-prod-api
