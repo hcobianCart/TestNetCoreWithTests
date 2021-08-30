@@ -1,13 +1,16 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: webapi-service
+  name: webapi-dev-service
+  namespace: default
+  labels:
+    app: webapi-dev
 spec:
-  selector:
-    app: webapi
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 80
+  selector:
+    app: webapi-dev
   type: LoadBalancer
-
+  loadBalancerIP: ""

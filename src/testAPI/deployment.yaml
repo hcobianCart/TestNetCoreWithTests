@@ -1,24 +1,59 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webapi-dev-config-gcmc
+  namespace: default
+  labels:
+    app: webapi-dev
+data:
+  ASPNETCORE_ENVIRONMENT: Development
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapi
+  name: webapi-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webapi
+      app: webapi-dev
   template:
     metadata:
       labels:
-        app: webapi
+        app: webapi-dev
     spec:
       containers:
-      - name: webapi
+      - name: webapi-dev
         image: gcr.io/PROJECT_ID/IMAGE:TAG
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              key: ASPNETCORE_ENVIRONMENT
+              name: webapi-dev-config-gcmc
         imagePullPolicy: Always
         resources:
           limits:
             memory: "128Mi"
-            cpu: "200m"
-        ports:
-        - containerPort: 80
+            cpu: "500m"
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: webapi-dev-hpa-zlar
+  namespace: default
+  labels:
+    app: webapi-dev
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: webapi-dev
+    apiVersion: apps/v1
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 80
