@@ -19,7 +19,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
 
-  IMAGE: webapi
+  IMAGE: cart-api
 
 jobs:
 
@@ -36,7 +36,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    # Insert values to appappsettings.Development file
+    # Insert values to appappsettings.Development file, takes values from general secrets section
     - uses: microsoft/variable-substitution@v1 
       with:
         files: '**/appsettings.Development.json'
@@ -46,7 +46,7 @@ jobs:
         Auth0Management.audience: ${{ secrets.DEV_AUTH0MANAGEMENT_AUDIENCE }}
         Auth0Management.client_secret: ${{ secrets.DEV_AUTH0MANAGEMENT_CLIENT_SECRET }}
 
-    # Insert values to appappsettings.Staging file
+    # Insert values to appappsettings.Staging file, takes values from general secrets section
     - uses: microsoft/variable-substitution@v1 
       with:
         files: '**/appsettings.Staging.json'
@@ -56,7 +56,7 @@ jobs:
         Auth0Management.audience: ${{ secrets.STA_AUTH0MANAGEMENT_AUDIENCE }}
         Auth0Management.client_secret: ${{ secrets.STA_AUTH0MANAGEMENT_CLIENT_SECRET }}
 
-    # Insert values to appappsettings.Production file
+    # Insert values to appappsettings.Production file, takes values from general secrets section
     - uses: microsoft/variable-substitution@v1 
       with:
         files: '**/appsettings.Production.json'
@@ -69,8 +69,8 @@ jobs:
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
-        service_account_key: ${{ secrets.GKE_SA_KEY }}
-        project_id: ${{ secrets.GKE_PROJECT }}
+        service_account_key: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
+        project_id: ${{ secrets.GKE_PROJECT }} #takes values from general secrets section
 
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
@@ -80,9 +80,9 @@ jobs:
     # Get the GKE credentials so we can deploy to the cluster
     - uses: google-github-actions/get-gke-credentials@v0.2.1
       with:
-        cluster_name: ${{ secrets.GKE_CLUSTER }}
-        location: ${{ secrets.GKE_ZONE }}
-        credentials: ${{ secrets.GKE_SA_KEY }}
+        cluster_name: ${{ secrets.GKE_CLUSTER }} #takes values from environment secrets section
+        location: ${{ secrets.GKE_ZONE }} #takes values from environment secrets section
+        credentials: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
 
     # Build the Docker image
     - name: Build
@@ -129,8 +129,8 @@ jobs:
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
-        service_account_key: ${{ secrets.GKE_SA_KEY }}
-        project_id: ${{ secrets.GKE_PROJECT }}
+        service_account_key: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
+        project_id: ${{ secrets.GKE_PROJECT }} #takes values from general secrets section
 
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
@@ -140,9 +140,9 @@ jobs:
     # Get the GKE credentials so we can deploy to the cluster
     - uses: google-github-actions/get-gke-credentials@v0.2.1
       with:
-        cluster_name: ${{ secrets.GKE_CLUSTER }}
-        location: ${{ secrets.GKE_ZONE }}
-        credentials: ${{ secrets.GKE_SA_KEY }}
+        cluster_name: ${{ secrets.GKE_CLUSTER }} #takes values from environment secrets section
+        location: ${{ secrets.GKE_ZONE }} #takes values from environment secrets section
+        credentials: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
 
     # Set up kustomize
     - name: Set up Kustomize
@@ -177,8 +177,8 @@ jobs:
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
-        service_account_key: ${{ secrets.GKE_SA_KEY }}
-        project_id: ${{ secrets.GKE_PROJECT }}
+        service_account_key: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
+        project_id: ${{ secrets.GKE_PROJECT }} #takes values from general secrets section
 
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
@@ -188,9 +188,9 @@ jobs:
     # Get the GKE credentials so we can deploy to the cluster
     - uses: google-github-actions/get-gke-credentials@v0.2.1
       with:
-        cluster_name: ${{ secrets.GKE_CLUSTER }}
-        location: ${{ secrets.GKE_ZONE }}
-        credentials: ${{ secrets.GKE_SA_KEY }}
+        cluster_name: ${{ secrets.GKE_CLUSTER }} #takes values from environment secrets section
+        location: ${{ secrets.GKE_ZONE }} #takes values from environment secrets section
+        credentials: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
 
     # Set up kustomize
     - name: Set up Kustomize
