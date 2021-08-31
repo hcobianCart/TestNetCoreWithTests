@@ -1,4 +1,14 @@
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cart-dev-api-config
+  namespace: default
+  labels:
+    app: cart-dev-api
+data:
+  ASPNETCORE_ENVIRONMENT: Production
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
