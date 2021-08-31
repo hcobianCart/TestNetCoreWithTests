@@ -29,48 +29,12 @@ jobs:
     defaults:
       run:
         working-directory: ./src/testAPI
-    environment: Development
+    environment: production
 
     steps:
 
     - name: Checkout
       uses: actions/checkout@v2
-
-    # Insert values to appappsettings.Development file, takes values from general secrets section
-    - uses: microsoft/variable-substitution@v1 
-      with:
-        files: '**/appsettings.Development.json'
-      env:
-        Auth0.Domain: ${{ secrets.DEV_AUTH0_DOMAIN }}
-        Auth0.ApiIdentifier: ${{ secrets.DEV_AUTH0_APIIDENTIFIER }}
-        Auth0Management.Domain: ${{ secrets.DEV_AUTH0MANAGEMENT_DOMAIN }}
-        Auth0Management.client_id: ${{ secrets.DEV_AUTH0MANAGEMENT_CLIENT_ID }}
-        Auth0Management.audience: ${{ secrets.DEV_AUTH0MANAGEMENT_AUDIENCE }}
-        Auth0Management.client_secret: ${{ secrets.DEV_AUTH0MANAGEMENT_CLIENT_SECRET }}
-
-    # Insert values to appappsettings.Staging file, takes values from general secrets section
-    - uses: microsoft/variable-substitution@v1 
-      with:
-        files: '**/appsettings.Staging.json'
-      env:
-        Auth0.Domain: ${{ secrets.STA_AUTH0_DOMAIN }}
-        Auth0.ApiIdentifier: ${{ secrets.STA_AUTH0_APIIDENTIFIER }}
-        Auth0Management.Domain: ${{ secrets.STA_AUTH0MANAGEMENT_DOMAIN }}
-        Auth0Management.client_id: ${{ secrets.STA_AUTH0MANAGEMENT_CLIENT_ID }}
-        Auth0Management.audience: ${{ secrets.STA_AUTH0MANAGEMENT_AUDIENCE }}
-        Auth0Management.client_secret: ${{ secrets.STA_AUTH0MANAGEMENT_CLIENT_SECRET }}
-
-    # Insert values to appappsettings.Production file, takes values from general secrets section
-    - uses: microsoft/variable-substitution@v1 
-      with:
-        files: '**/appsettings.Production.json'
-      env:
-        Auth0.Domain: ${{ secrets.PRO_AUTH0_DOMAIN }}
-        Auth0.ApiIdentifier: ${{ secrets.PRO_AUTH0_APIIDENTIFIER }}
-        Auth0Management.Domain: ${{ secrets.PRO_AUTH0MANAGEMENT_DOMAIN }}
-        Auth0Management.client_id: ${{ secrets.PRO_AUTH0MANAGEMENT_CLIENT_ID }}
-        Auth0Management.audience: ${{ secrets.PRO_AUTH0MANAGEMENT_AUDIENCE }}
-        Auth0Management.client_secret: ${{ secrets.PRO_AUTH0MANAGEMENT_CLIENT_SECRET }}
 
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
@@ -86,8 +50,8 @@ jobs:
     # Get the GKE credentials so we can deploy to the cluster
     - uses: google-github-actions/get-gke-credentials@v0.2.1
       with:
-        cluster_name: ${{ secrets.GKE_CLUSTER }} #takes values from environment secrets section
-        location: ${{ secrets.GKE_ZONE }} #takes values from environment secrets section
+        cluster_name: ${{ secrets.GKE_CLUSTER }} #takes values from general secrets section
+        location: ${{ secrets.GKE_ZONE }} #takes values from general secrets section
         credentials: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
 
     # Build the Docker image

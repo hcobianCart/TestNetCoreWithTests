@@ -1,14 +1,4 @@
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cart-dev-api-config
-  namespace: default
-  labels:
-    app: cart-dev-api
-data:
-  ASPNETCORE_ENVIRONMENT: Development
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,34 +16,12 @@ spec:
       containers:
       - name: cart-dev-api
         image: gcr.io/PROJECT_ID/IMAGE:TAG
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-          valueFrom:
-            configMapKeyRef:
-              key: ASPNETCORE_ENVIRONMENT
+        envFrom:
+          - configMapRef: 
               name: cart-dev-api-config
         imagePullPolicy: Always
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
----
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: cart-dev-api-hpa-zlar
-  namespace: default
-  labels:
-    app: cart-dev-api
-spec:
-  scaleTargetRef:
-    kind: Deployment
-    name: cart-dev-api
-    apiVersion: apps/v1
-  minReplicas: 1
-  maxReplicas: 5
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      targetAverageUtilization: 80
+
