@@ -36,9 +36,18 @@ namespace testAPI.Controllers
                     {
                         IsDevelopment = Env.IsDevelopment(),
                         EnvironmentName = Env.EnvironmentName,
-                        audience = Configuration["Auth0Management:audience"],
-                        client_id = Configuration["Auth0Management:client_id"],
-                        Domain = Configuration["Auth0Management:Domain"]
+                        Auth0Management = new
+                        {
+                            audience = Configuration["Auth0Management:audience"],
+                            client_id = Configuration["Auth0Management:client_id"],
+                            Domain = Configuration["Auth0Management:Domain"],
+                            client_secret = Configuration["Auth0Management:client_secret"]
+                        },
+                        Auth0 = new
+                        {
+                            Domain = Configuration["Auth0:Domain"],
+                            ApiIdentifier = Configuration["Auth0:ApiIdentifier"]
+                        }
                     }
                     );
             }
