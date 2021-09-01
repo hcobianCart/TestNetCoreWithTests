@@ -29,6 +29,19 @@ spec:
         envFrom:
           - configMapRef: 
               name: cart-dev-api-config
+        env: 
+          - name: Auth0__Domain
+            valueFrom:
+              secretKeyRef:
+                name: cart-dev-api-secret
+                key: Auth0__Domain
+
+          - name: Auth0__ApiIdentifier
+            valueFrom:
+              secretKeyRef:
+                name: cart-dev-api-secret
+                key: Auth0__ApiIdentifier
+
         imagePullPolicy: Always
         resources:
           limits:
