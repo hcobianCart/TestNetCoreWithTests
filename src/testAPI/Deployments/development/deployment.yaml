@@ -31,7 +31,6 @@ spec:
               name: cart-dev-api-config
           - secretRef:
               name: cart-dev-api-secret
-
         imagePullPolicy: Always
         resources:
           limits:
