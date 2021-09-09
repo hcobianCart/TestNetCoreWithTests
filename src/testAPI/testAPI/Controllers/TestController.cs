@@ -47,6 +47,11 @@ namespace testAPI.Controllers
                         {
                             Domain = Configuration["Auth0:Domain"],
                             ApiIdentifier = Configuration["Auth0:ApiIdentifier"]
+                        },
+                        Serilog = new 
+                        {
+                            Name = Configuration["Serilog:WriteTo:1:Name"],
+                            applicationName = Configuration["Serilog:WriteTo:1:Args:applicationName"]
                         }
                     }
                     );
