@@ -77,6 +77,7 @@ jobs:
       run: |-
         cd k8s/overlays/develop
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-        ./kustomize build . | kubectl apply -f -
+        ./kustomize build . > build.yaml
+        kubectl apply -f build.yaml
         kubectl rollout status deployment/cart-api --namespace cart-api-ns-dev
         kubectl get services -o wide
