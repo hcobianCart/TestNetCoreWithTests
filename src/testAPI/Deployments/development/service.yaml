@@ -2,15 +2,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: cart-dev-api-service
-  namespace: default
-  labels:
-    app: cart-dev-api
+  name: cart-api-service-dev
 spec:
   ports:
   - protocol: TCP
     port: 80
   selector:
-    app: cart-dev-api
+    app: cart-api-dev
   type: LoadBalancer
   loadBalancerIP: ""

@@ -2,35 +2,32 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cart-dev-api-config
-  namespace: default
-  labels:
-    app: cart-dev-api
+  name: cart-api-config-dev
 data:
   ASPNETCORE_ENVIRONMENT: Development
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cart-dev-api
+  name: cart-api-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cart-dev-api
+      app: cart-api-dev
   template:
     metadata:
       labels:
-        app: cart-dev-api
+        app: cart-api-dev
     spec:
       containers:
-      - name: cart-dev-api
+      - name: cart-api-dev
         image: gcr.io/PROJECT_ID/IMAGE:TAG
         envFrom:
           - configMapRef: 
-              name: cart-dev-api-config
+              name: cart-api-config-dev
           - secretRef:
-              name: cart-dev-api-secret
+              name: cart-api-secret-dev
         imagePullPolicy: Always
         resources:
           limits:
