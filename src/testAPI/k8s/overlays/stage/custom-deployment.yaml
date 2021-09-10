@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cart-api
+  template:
+    spec:
+      containers:
+      - name: cart-api
+        image: gcr.io/PROJECT_ID/IMAGE:TAG
+        envFrom:
+          - configMapRef: 
+              name: cart-api-config-staging
+          - secretRef:
+              name: cart-api-secret-staging
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+
