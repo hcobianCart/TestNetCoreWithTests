@@ -18,7 +18,7 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  IMAGE: cart-api
+  IMAGE: cart-authorization-api
 
 jobs:
 
@@ -78,8 +78,8 @@ jobs:
         cd k8s/overlays/develop
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
-        kubectl rollout status deployment/cart-api --namespace cart-api-ns-dev
-        kubectl get services -o wide --namespace cart-api-ns-dev
+        kubectl rollout status deployment/cart-authorization-api --namespace cart-authorization-api-dev
+        kubectl get services -o wide --namespace cart-authorization-api-dev
 
     # Staging
     # Set up kustomize
@@ -95,8 +95,8 @@ jobs:
         cd k8s/overlays/stage
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
-        kubectl rollout status deployment/cart-api --namespace cart-api-ns-staging
-        kubectl get services -o wide --namespace cart-api-ns-staging
+        kubectl rollout status deployment/cart-authorization-api --namespace cart-authorization-api-stage
+        kubectl get services -o wide --namespace cart-authorization-api-stage
 
     #prod
     # Set up kustomize
@@ -112,5 +112,5 @@ jobs:
         cd k8s/overlays/main
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
-        kubectl rollout status deployment/cart-api --namespace cart-api-ns-prod
-        kubectl get services -o wide --namespace cart-api-ns-prod
+        kubectl rollout status deployment/cart-authorization-api --namespace cart-authorization-api-prod
+        kubectl get services -o wide --namespace cart-authorization-api-prod
