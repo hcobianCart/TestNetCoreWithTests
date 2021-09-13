@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cart-api-ns-staging
+  name: cart-authorization-api-stage

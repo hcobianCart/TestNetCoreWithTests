@@ -1,8 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: cart-api-ns-prod
+namespace: cart-authorization-api-prod
 commonLabels:
-  app: cart-api-prod
+  app: cart-authorization-api
 
 bases: 
 - ../../base

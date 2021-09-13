@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cart-api-config-prod
+  name: authorization-config
   namespace: default
   labels:
-    app: cart-api
+    app: cart-authorization-api
 data:
   ASPNETCORE_ENVIRONMENT: Production

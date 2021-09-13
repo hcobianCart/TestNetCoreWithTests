@@ -2,17 +2,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cart-api
+  name: cart-authorization-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cart-api
+      app: cart-authorization-api
   template:
     metadata:
       labels:
-        app: cart-api
+        app: cart-authorization-api
     spec:
       containers:
-      - name: cart-api
+      - name: cart-authorization-api
+        image: gcr.io/PROJECT_ID/IMAGE:TAG
+        envFrom:
+          - configMapRef: 
+              name: authorization-config
+          - secretRef:
+              name: authorization-secrets
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        
 
