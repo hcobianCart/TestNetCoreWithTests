@@ -91,6 +91,28 @@ jobs:
     environment: production
 
     steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Setup gcloud CLI
+    - uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
+        project_id: ${{ secrets.GKE_PROJECT }} #takes values from general secrets section
+
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+    - run: |-
+        gcloud --quiet auth configure-docker
+
+    # Get the GKE credentials so we can deploy to the cluster
+    - uses: google-github-actions/get-gke-credentials@v0.2.1
+      with:
+        cluster_name: ${{ secrets.GKE_CLUSTER }} #takes values from general secrets section
+        location: ${{ secrets.GKE_ZONE }} #takes values from general secrets section
+        credentials: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
+
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
@@ -117,6 +139,28 @@ jobs:
     environment: production
 
     steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Setup gcloud CLI
+    - uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
+        project_id: ${{ secrets.GKE_PROJECT }} #takes values from general secrets section
+
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+    - run: |-
+        gcloud --quiet auth configure-docker
+
+    # Get the GKE credentials so we can deploy to the cluster
+    - uses: google-github-actions/get-gke-credentials@v0.2.1
+      with:
+        cluster_name: ${{ secrets.GKE_CLUSTER }} #takes values from general secrets section
+        location: ${{ secrets.GKE_ZONE }} #takes values from general secrets section
+        credentials: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
+        
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
