@@ -81,7 +81,16 @@ jobs:
         kubectl rollout status deployment/cart-authorization-api --namespace cart-authorization-api-dev
         kubectl get services -o wide --namespace cart-authorization-api-dev
 
-    # Staging
+  Deploy-Stage:
+    name: Deploy-Stage 
+    needs: Deploy-Dev
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src/testAPI
+    environment: production
+
+    steps:
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
@@ -98,7 +107,16 @@ jobs:
         kubectl rollout status deployment/cart-authorization-api --namespace cart-authorization-api-stage
         kubectl get services -o wide --namespace cart-authorization-api-stage
 
-    #prod
+  Deploy-Prod:
+    name: Deploy-Prod 
+    needs: Deploy-Stage
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src/testAPI
+    environment: production
+
+    steps:
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
