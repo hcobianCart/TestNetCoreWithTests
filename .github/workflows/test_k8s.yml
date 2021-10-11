@@ -13,8 +13,9 @@
 name: Build and Deploy to GKE
 
 on:
-  push:
-    branches: [ main ]
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}

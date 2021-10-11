@@ -1,0 +1,88 @@
+  name: Build and Deploy to GKE
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  IMAGE: cart-authorization-api
+
+jobs:
+
+  Build:
+    name: Build 
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src/testAPI
+    environment: production
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Setup gcloud CLI
+    - uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
+        project_id: ${{ secrets.GKE_PROJECT }} #takes values from general secrets section
+
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+    - run: |-
+        gcloud --quiet auth configure-docker
+
+    # Get the GKE credentials so we can deploy to the cluster
+    - uses: google-github-actions/get-gke-credentials@v0.2.1
+      with:
+        cluster_name: ${{ secrets.GKE_CLUSTER }} #takes values from general secrets section
+        location: ${{ secrets.GKE_ZONE }} #takes values from general secrets section
+        credentials: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
+
+    # Build the Docker image
+    - name: Build
+      run: |-
+        docker build \
+          --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+          .
+
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: |-
+        docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+
+  Deploy:
+    name: Deploy 
+    needs: Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./kubernetes/helm
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Setup gcloud CLI
+    - uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
+        project_id: ${{ secrets.GKE_PROJECT }} #takes values from general secrets section
+
+    # Get the GKE credentials so we can deploy to the cluster
+    - uses: google-github-actions/get-gke-credentials@v0.2.1
+      with:
+        cluster_name: ${{ secrets.GKE_CLUSTER }} #takes values from general secrets section
+        location: ${{ secrets.GKE_ZONE }} #takes values from general secrets section
+        credentials: ${{ secrets.GKE_SA_KEY }} #takes values from general secrets section
+    
+    # Install helm
+    - uses: azure/setup-helm@v1
+      id: install
+
+    # Deploy latest version
+    - run: helm upgrade -f ./identity-api/values-dev.yaml --set deployment.image=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA identity-api identity-api
+

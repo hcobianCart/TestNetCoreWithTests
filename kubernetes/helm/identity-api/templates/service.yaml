@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.name }}
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+  selector:
+    app: {{ .Values.name }}
+  type: LoadBalancer
+  loadBalancerIP: ""

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.ConfigMap.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.name }}
+data:
+  ASPNETCORE_ENVIRONMENT: {{ .Values.ConfigMap.data.ASPNETCORE_ENVIRONMENT }}

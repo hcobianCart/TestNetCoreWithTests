@@ -1,0 +1,3 @@
+deployment:
+  image: "aimvector/python"
+  tag: "1.0.5"
