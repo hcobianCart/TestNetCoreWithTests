@@ -1,9 +1,8 @@
 deployment:
   image: gcr.io/PROJECT_ID/IMAGE:TAG
 
-namespace: cart-authorization-api-dev
-enviroment: dev
-name: cart-authorization-api
+namespace: identity-api-dev
+name: identity-api
 
 ConfigMap:
   name: authorization-config
