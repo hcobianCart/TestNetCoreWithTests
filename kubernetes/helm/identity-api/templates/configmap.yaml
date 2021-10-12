@@ -27,7 +27,7 @@ data:
             }
           },
           {
-            "Name": "NewRelicLogs",
+            "Name": "NewRelic",
             "Args": {
               "applicationName": "identity-api-dev",
               "licenseKey": "",
