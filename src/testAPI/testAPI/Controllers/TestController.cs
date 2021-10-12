@@ -53,7 +53,8 @@ namespace testAPI.Controllers
                             Name = Configuration["Serilog:WriteTo:1:Name"],
                             applicationName = Configuration["Serilog:WriteTo:1:Args:applicationName"],
                             endpointUrl = Configuration["Serilog:WriteTo:1:Args:endpointUrl"],
-                            restrictedToMinimumLevel = Configuration["Serilog:WriteTo:1:Args:restrictedToMinimumLevel"]
+                            restrictedToMinimumLevel = Configuration["Serilog:WriteTo:1:Args:restrictedToMinimumLevel"],
+                            licenseKey = Configuration["Serilog:WriteTo:1:Args:licenseKey"]
                         }
                     }
                     );

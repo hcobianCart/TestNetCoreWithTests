@@ -21,13 +21,9 @@ spec:
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.deployment.image }}
-        ports:
-          - containerPort: 80
-        volumeMounts:
-          - name: appsettings-volume
-            mountPath: /app/appsettings.json
-            subPath: appsettings.json
         envFrom:
+          - configMapRef: 
+              name: {{ .Values.ConfigMap.name }}
           - secretRef:
               name: {{ .Values.Secret.name }}
         imagePullPolicy: Always
@@ -35,7 +31,3 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
-      volumes:
-        - name: appsettings-volume
-          configMap:
-             name: {{ .Values.ConfigMap.name }}
