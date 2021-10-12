@@ -8,9 +8,9 @@ ConfigMap:
   name: authorization-config
   data: 
     ASPNETCORE_ENVIRONMENT: Development
-    Serilog__WriteTo__1__Args__applicationName : "identity-api-dev"
-    Serilog__WriteTo__1__Args__endpointUrl : "https://log-api.newrelic.com/log/v1"
-    Serilog__WriteTo__1__Args__restrictedToMinimumLevel : "Warning"
+    Serilog__WriteTo__1__Args__applicationName : identity-api-dev
+    Serilog__WriteTo__1__Args__endpointUrl : https://log-api.newrelic.com/log/v1
+    Serilog__WriteTo__1__Args__restrictedToMinimumLevel : Warning
 
 Secret:
   name: authorization-secrets
