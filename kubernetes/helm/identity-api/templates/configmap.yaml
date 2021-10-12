@@ -58,23 +58,23 @@ data:
       },
       "AllowedHosts": "*",
       "Auth0": {
-        "Domain": "",
-        "ApiIdentifier": ""
+        "Domain": "Domain",
+        "ApiIdentifier": "ApiIdentifier"
       },
       "Auth0Management": {
-        "Domain": "",
-        "audience": "",
-        "client_id": "",
-        "client_secret": ""
+        "Domain": "-Domain",
+        "audience": "-audience",
+        "client_id": "-client_id",
+        "client_secret": "-client_secret"
       },
       "CartDatabaseSettings": {
-        "UsersCollectionName": "",
-        "ConnectionString": "",
-        "DatabaseName": ""
+        "UsersCollectionName": "-",
+        "ConnectionString": "-",
+        "DatabaseName": "-"
       },
       "LaunchDarklySettings": {
-        "User": "",
-        "Key": ""
+        "User": "-",
+        "Key": "-"
       }
     }
 

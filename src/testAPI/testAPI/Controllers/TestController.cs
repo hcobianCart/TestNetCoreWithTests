@@ -51,8 +51,9 @@ namespace testAPI.Controllers
                         Serilog = new 
                         {
                             Name = Configuration["Serilog:WriteTo:1:Name"],
-                            applicationName = Configuration["Serilog:WriteTo:0:Args:applicationName"],
-                            applicationName_2 = Configuration["Serilog:WriteTo:1:Args:applicationName"]
+                            applicationName = Configuration["Serilog:WriteTo:1:Args:applicationName"],
+                            endpointUrl = Configuration["Serilog:WriteTo:1:Args:endpointUrl"],
+                            restrictedToMinimumLevel = Configuration["Serilog:WriteTo:1:Args:restrictedToMinimumLevel"]
                         }
                     }
                     );
