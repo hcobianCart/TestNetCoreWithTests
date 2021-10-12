@@ -28,8 +28,6 @@ spec:
             mountPath: /app/appsettings.json
             subPath: appsettings.json
         envFrom:
-          - configMapRef: 
-              name: {{ .Values.ConfigMap.name }}
           - secretRef:
               name: {{ .Values.Secret.name }}
         imagePullPolicy: Always
