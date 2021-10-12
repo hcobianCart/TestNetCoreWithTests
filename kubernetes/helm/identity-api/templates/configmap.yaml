@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   labels:
     app: {{ .Values.name }}
-stringData:
+data:
   ASPNETCORE_ENVIRONMENT: {{ .Values.ConfigMap.data.ASPNETCORE_ENVIRONMENT }}    
   Serilog__WriteTo__1__Args__applicationName : {{ .Values.ConfigMap.data.Serilog__WriteTo__1__Args__applicationName }}
   Serilog__WriteTo__1__Args__endpointUrl : {{ .Values.ConfigMap.data.Serilog__WriteTo__1__Args__endpointUrl }}
