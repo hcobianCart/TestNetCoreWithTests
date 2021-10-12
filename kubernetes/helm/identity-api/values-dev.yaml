@@ -12,3 +12,4 @@ ConfigMap:
 Secret:
   name: authorization-secrets
 
+replicaCount: 1
