@@ -25,7 +25,7 @@ spec:
           - containerPort: 80
         volumeMounts:
           - name: appsettings-volume
-            mountPath: /app/publish/appsettings.json
+            mountPath: /app/appsettings.json
             subPath: appsettings.json
         envFrom:
           - secretRef:
