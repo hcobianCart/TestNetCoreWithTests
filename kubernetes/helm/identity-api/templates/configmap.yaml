@@ -6,7 +6,5 @@ metadata:
   labels:
     app: {{ .Values.name }}
 data:
-  ASPNETCORE_ENVIRONMENT: {{ .Values.ConfigMap.data.ASPNETCORE_ENVIRONMENT }}    
-  Serilog__WriteTo__1__Args__applicationName : {{ .Values.ConfigMap.data.Serilog__WriteTo__1__Args__applicationName }}
-  Serilog__WriteTo__1__Args__endpointUrl : {{ .Values.ConfigMap.data.Serilog__WriteTo__1__Args__endpointUrl }}
-  Serilog__WriteTo__1__Args__restrictedToMinimumLevel : {{ .Values.ConfigMap.data.Serilog__WriteTo__1__Args__restrictedToMinimumLevel }}
+  ASPNETCORE_ENVIRONMENT: {{ .Values.ConfigMap.data.ASPNETCORE_ENVIRONMENT }}  
+  ASPNETCORE_URLS:   {{ .Values.ConfigMap.data.ASPNETCORE_URLS }}  

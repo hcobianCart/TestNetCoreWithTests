@@ -21,6 +21,13 @@ spec:
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.deployment.image }}
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        - name: https
+          containerPort: 443
+          protocol: TCP
         envFrom:
           - configMapRef: 
               name: {{ .Values.ConfigMap.name }}
