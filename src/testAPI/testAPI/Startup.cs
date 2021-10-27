@@ -3,6 +3,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -40,8 +41,9 @@ namespace testAPI
             });
 
             services.AddHealthChecks().AddCheck("config", () => HealthCheckResult.Healthy(), tags: new[] { "test" });
-        }
 
+            services.AddHttpsRedirection(options => options.HttpsPort = 443);
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
