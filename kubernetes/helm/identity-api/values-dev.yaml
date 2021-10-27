@@ -7,9 +7,9 @@ name: identity-api
 ConfigMap:
   name: authorization-config
   data: 
-    ASPNETCORE_ENVIRONMENT: Development
-    ASPNETCORE_URLS: http://+:443;http://+:80
-    ASPNETCORE_FORWARDEDHEADERS_ENABLED : true
+    ASPNETCORE_ENVIRONMENT: "Development"
+    ASPNETCORE_URLS: "http://+:443;http://+:80"
+    ASPNETCORE_FORWARDEDHEADERS_ENABLED : "true"
 
 Secret:
   name: authorization-secrets
