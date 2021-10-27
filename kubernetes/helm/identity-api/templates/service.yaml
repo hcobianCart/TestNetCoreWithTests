@@ -14,5 +14,4 @@ spec:
     targetPort: 80
   selector:
     app: {{ .Values.name }}
-  type: LoadBalancer
-  loadBalancerIP: ""
+  type: NodePort
