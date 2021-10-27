@@ -57,15 +57,7 @@ namespace testAPI
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
-                {
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
-
-                endpoints.MapControllers();
-            });
+            app.UseHealthChecks("/healthz");
         }
     }
 }
