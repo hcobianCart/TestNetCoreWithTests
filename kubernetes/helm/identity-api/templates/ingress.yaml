@@ -8,6 +8,8 @@ metadata:
   annotations:
     networking.gke.io/managed-certificates: hcobian-api-dev
     kubernetes.io/ingress.class: 'gce'
+    kubernetes.io/ingress.allow-http: "false"
+    ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   rules:
     - http:
