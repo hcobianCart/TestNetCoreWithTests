@@ -30,14 +30,16 @@ spec:
           protocol: TCP
         readinessProbe:
           tcpSocket:
+            path: /health
             port: 80
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           tcpSocket:
+            path: /health
             port: 80
-          initialDelaySeconds: 15
-          periodSeconds: 20
+          initialDelaySeconds: 5
+          periodSeconds: 100
         envFrom:
           - configMapRef: 
               name: {{ .Values.ConfigMap.name }}
