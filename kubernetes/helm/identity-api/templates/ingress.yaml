@@ -7,10 +7,15 @@ metadata:
     app: {{ .Values.name }}
   annotations:
     networking.gke.io/managed-certificates: hcobian-api-dev
-    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.class: 'gce'
 spec:
-  defaultBackend:
-    service:
-      name: {{ .Values.name }}
-      port:
-        number: 80
+  rules:
+    - http:
+        paths:
+          - path: /*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .Values.name }}
+                port:
+                  number: 80

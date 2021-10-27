@@ -18,4 +18,6 @@ spec:
     targetPort: 443
   selector:
     app: {{ .Values.name }}
-  type: NodePort
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
