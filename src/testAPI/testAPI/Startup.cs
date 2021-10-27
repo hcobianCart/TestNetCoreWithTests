@@ -114,11 +114,6 @@ namespace testAPI
             {
                 services.AddHealthChecks().AddCheck("Ping Auth0Management__Domain", () => HealthCheckResult.Unhealthy("Error Auth0Management__Domain ", ex), tags: new[] { "Endpoints" });
             }
-            services.AddHttpsRedirection(options =>
-            {
-                options.RedirectStatusCode = (int)HttpStatusCode.PermanentRedirect;
-                options.HttpsPort = 443;
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
