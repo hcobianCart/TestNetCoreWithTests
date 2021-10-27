@@ -9,6 +9,7 @@ ConfigMap:
   data: 
     ASPNETCORE_ENVIRONMENT: Development
     ASPNETCORE_URLS: http://+:443;http://+:80
+    ASPNETCORE_FORWARDEDHEADERS_ENABLED : true
 
 Secret:
   name: authorization-secrets

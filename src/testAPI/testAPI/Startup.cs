@@ -42,7 +42,12 @@ namespace testAPI
 
             services.AddHealthChecks().AddCheck("config", () => HealthCheckResult.Healthy(), tags: new[] { "test" });
 
-            services.AddHttpsRedirection(options => options.HttpsPort = 443);
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = (int)HttpStatusCode.PermanentRedirect;
+                options.HttpsPort = 443;
+            });
+
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -53,6 +58,9 @@ namespace testAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "testAPI v1"));
             }
+
+            app.UseHsts();
+            
 
 
             app.UseRouting();

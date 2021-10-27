@@ -7,4 +7,5 @@ metadata:
     app: {{ .Values.name }}
 data:
   ASPNETCORE_ENVIRONMENT: {{ .Values.ConfigMap.data.ASPNETCORE_ENVIRONMENT }}  
-  ASPNETCORE_URLS:   {{ .Values.ConfigMap.data.ASPNETCORE_URLS }}  
+  ASPNETCORE_URLS: {{ .Values.ConfigMap.data.ASPNETCORE_URLS }}  
+  ASPNETCORE_FORWARDEDHEADERS_ENABLED: {{ .Values.ConfigMap.data.ASPNETCORE_FORWARDEDHEADERS_ENABLED }}
